@@ -29,17 +29,11 @@ export class DashboardComponent implements OnInit {
         this.alerts.push({
             id: 1,
             type: 'success',
-            message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
+            message: 'Check out Bayo Pay new API documentations at http://staging.bayo.my/api'
         }, {
             id: 2,
             type: 'warning',
-            message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-                consectetur velit culpa molestias dignissimos
-                voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
+            message: 'Please enter valid Return URL and Callback URL in Settings for your payment integration'
         });
     }
 
