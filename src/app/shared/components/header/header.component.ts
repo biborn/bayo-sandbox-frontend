@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -10,13 +12,19 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
 
     pushRightClass: string = 'push-right';
-    
-    constructor(private translate: TranslateService, public router: Router) {
+    loggedInUser: string = '';
+
+    constructor(private authService: AuthService, private translate: TranslateService, public router: Router) {
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
             }
         });
+
+        // TODO: Fix user name fetching
+        if (this.authService.currentUser.username) {
+            this.loggedInUser = this.authService.currentUser.username;
+        }
     }
 
     ngOnInit() {}
@@ -36,8 +44,8 @@ export class HeaderComponent implements OnInit {
         dom.classList.toggle('rtl');
     }
 
-    onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+    onLoggedOut() {
+        this.authService.logout();
     }
 
     changeLang(language: string) {
