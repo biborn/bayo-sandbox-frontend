@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/services/auth.service';
 import { routerTransition } from '../router.animations';
+
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -10,8 +11,6 @@ import { routerTransition } from '../router.animations';
     animations: [routerTransition()]
 })
 export class LoginComponent implements OnInit {
-
-    loginForm: any = {};
     username: string;
     password: string;
 
@@ -23,15 +22,7 @@ export class LoginComponent implements OnInit {
         if (this.auth.loggedIn) {
             this.router.navigate(['/dashboard']);
         }
-        // this.loginForm = {
-        //     email: this.email,
-        //     password: this.password
-        // };
     }
-
-    /*onLoggedin() {
-        localStorage.setItem('isLoggedin', 'true');
-    }*/
 
     login() {
         this.auth.login(this.username, this.password).subscribe(
