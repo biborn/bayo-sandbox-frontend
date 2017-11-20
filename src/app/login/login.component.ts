@@ -36,9 +36,10 @@ export class LoginComponent implements OnInit {
     login() {
         this.auth.login(this.username, this.password).subscribe(
             (res) => {
+                console.log('RES:', res);
                 localStorage.setItem('isLoggedin', 'true');
                 this.router.navigate(['/dashboard']);
-            }, error => {
+            }, (error) => {
                 console.log('invalid email or password!', error);
             }
         );
