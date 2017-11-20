@@ -12,7 +12,7 @@ export class TransactionsService {
 
     constructor(private http: Http) { }
     getAllTransactions(username): Observable<any> {
-        let request_body = {
+        const request_body = {
             niaga_id: username
         };
         return this.http.post('http://localhost:3000/api/getalltransactions', request_body, this.options).map(res => res.json());
