@@ -12,6 +12,7 @@ import { AuthGuard } from './shared';
 import { AuthService} from './shared/services/auth.service';
 import { UserService} from './shared/services/user.service';
 import {TransactionsService} from './shared/services/transactions.service';
+import {SettingsService} from './shared/services/settings.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -41,7 +42,8 @@ export function HttpLoaderFactory(http: Http) {
         AuthGuard,
         AuthService,
         UserService,
-        TransactionsService
+        TransactionsService,
+        SettingsService
     ],
     bootstrap: [AppComponent]
 })
