@@ -14,14 +14,9 @@ export class SettingsComponent implements OnInit {
         callback_url: null,
         return_url: null
     };
-    // username = localStorage.getItem('username');
 
-    message: string;
-    user;
+    constructor(private settingsService: SettingsService, private authService: AuthService) {}
 
-    constructor(private settingsService: SettingsService, private authService: AuthService) {
-
-    }
     ngOnInit() {
         const loggedInUser = localStorage.getItem('username');
         this.getUrls(loggedInUser);

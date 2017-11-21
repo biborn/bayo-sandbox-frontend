@@ -3,7 +3,6 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
 
-import { UserService } from './user.service';
 import { API_URL } from './config.service';
 import 'rxjs/add/operator/map';
 
@@ -17,7 +16,7 @@ export class AuthService {
     private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
     private options = new RequestOptions({ headers: this.headers });
 
-    constructor(private http: Http, private userService: UserService, private router: Router) {
+    constructor(private http: Http, private router: Router) {
         const token = localStorage.getItem('token');
         if (token) {
             const decodedUser = this.decodeUserFromToken(token);
@@ -36,30 +35,6 @@ export class AuthService {
                 this.processAuth(response);
                 return this.loggedIn;
         });
-        //     .map((response) => {
-        //     console.log('SECOND MAP:', response);
-        // });
-        // return this.userService.login(username, password).map(res => res.json()).map(
-        //     res => {
-        //         console.log('RESPONSE: ', res);
-        //         localStorage.setItem('token', res.token);
-        //         // localStorage.setItem('username', res.user);
-        //         // this.authenticatedUser.next(res.user);
-        //         // this.changeUser(res.user);
-        //         const decodedUser = this.decodeUserFromToken(res.token);
-        //         console.log('const decodedUser: ', decodedUser);
-        //         this.setCurrentUser(decodedUser);
-        //
-        //
-        //         console.log(
-        //             this.jwtHelper.decodeToken(res.token),
-        //             this.jwtHelper.getTokenExpirationDate(res.token),
-        //             this.jwtHelper.isTokenExpired(res.token)
-        //         );
-        //
-        //         return this.loggedIn;
-        //     }
-        // );
     }
 
     logout() {
@@ -90,5 +65,4 @@ export class AuthService {
         delete decodedUser.role;
         console.log('currentUser: ', this.currentUser);
     }
-
 }
