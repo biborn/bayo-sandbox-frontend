@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {API_URL} from './config.service';
 
 @Injectable()
 export class UserService {
@@ -20,7 +21,7 @@ export class UserService {
             username: username,
             password: password
         };
-        return this.http.post('http://localhost:3000/api/login', credentials, this.options);
+        return this.http.post(API_URL + 'login', credentials, this.options);
     }
 
     getUsers(): Observable<any> {

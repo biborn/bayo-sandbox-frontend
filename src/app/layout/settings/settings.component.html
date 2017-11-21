@@ -8,16 +8,16 @@
 
             <form role="form">
                 <fieldset class="form-group">
-                    <label><strong>Callback URL</strong></label>
-                    <input class="form-control" value="{{callback_url}}">
+                    <label for="callback_url"><strong>Callback URL</strong></label>
+                    <input class="form-control" id="callback_url" name="callback_url" [(ngModel)]="urls.callback_url">
                     <p class="help-block">Example: <em>https://yoursite.com.my/callback.php</em></p>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label><strong>Return URL</strong></label>
-                    <input class="form-control" name="return_url" [(ngModel)]="return_url" value="{{return_url}}">
+                    <label for="return_url"><strong>Return URL</strong></label>
+                    <input class="form-control" id="return_url" name="return_url" [(ngModel)]="urls.return_url">
                     <p class="help-block">Example: <em>https://yoursite.com.my/return.php</em></p>
                 </fieldset>
-                <button type="submit" class="btn btn-primary">Save Settings</button>
+                <button type="submit" class="btn btn-primary" (click)="saveUrls()">Save Settings</button>
             </form>
         </div>
     </div>

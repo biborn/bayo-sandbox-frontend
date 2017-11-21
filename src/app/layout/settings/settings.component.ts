@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { SettingsService } from '../../shared/services/settings.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
     selector: 'app-settings',
@@ -9,18 +10,36 @@ import { SettingsService } from '../../shared/services/settings.service';
     animations: [routerTransition()]
 })
 export class SettingsComponent implements OnInit {
-    callback_url: string;
-    return_url: string;
+    urls = {
+        callback_url: null,
+        return_url: null
+    };
+    // username = localStorage.getItem('username');
 
-    constructor(private settingsService: SettingsService) {
-        this.settingsService.getUrls('terungshop').subscribe((data) => {
-            console.log('DATA:', data);
-            this.callback_url = data.callback_url;
-            this.return_url = data.return_url;
-        });
+    message: string;
+    user;
+
+    constructor(private settingsService: SettingsService, private authService: AuthService) {
+
     }
     ngOnInit() {
-        console.log('GOT CALLBACK DATA?: ', this.callback_url);
-        console.log('GOT RETURN DATA?: ', this.return_url);
+        const loggedInUser = localStorage.getItem('username');
+        this.getUrls(loggedInUser);
+
+    }
+
+    getUrls(username) {
+        this.settingsService.getUrls(username).subscribe((data) => {
+            console.log('DATA:', data);
+            this.urls = data.data;
+            console.log('CALLBACK DATA?: ', this.urls.callback_url);
+            console.log('RETURN DATA?: ', this.urls.return_url);
+        });
+    }
+
+    saveUrls() {
+        this.settingsService.saveUrls(this.urls.callback_url, this.urls.return_url).subscribe(response => {
+            console.log('saveUrls(): ', response);
+        });
     }
 }
